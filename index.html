@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeoMeow2108 | Cute Dev Bio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pastel-pink: #ffd6e7;
+            --pastel-blue: #c1e3ff;
+            --pastel-purple: #d9c5ff;
+            --pastel-green: #c2ffd9;
+            --pastel-yellow: #fff6c1;
+            --pastel-lavender: #e6d4ff;
+            --discord-blurple: #5865F2;
+            --discord-green: #57F287;
+            --text-dark: #5a5475;
+            --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #1a1a2e;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: radial-gradient(circle at 20% 30%, rgba(255, 214, 231, 0.15) 0%, transparent 20%),
+                              radial-gradient(circle at 80% 80%, rgba(193, 227, 255, 0.15) 0%, transparent 20%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            border: 8px solid white;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-lavender));
+            opacity: 0.7;
+            animation: float 6s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .username {
+            font-family: 'Mochiy Pop P One', sans-serif;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #ff85a2, #9d65ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+            padding: 0 10px;
+        }
+
+        .username::before, .username::after {
+            content: '✦';
+            color: #ff85a2;
+            margin: 0 10px;
+        }
+
+        .theme-toggle {
+            background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-lavender));
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            color: var(--text-dark);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 131, 193, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            border-top: 5px solid;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .card-title i {
+            font-size: 1.5rem;
+        }
+
+        .discord-card {
+            border-top-color: var(--discord-blurple);
+            grid-column: span 2;
+            background: linear-gradient(to right, #f0f2ff, #f8f0ff);
+        }
+
+        .spotify-card {
+            border-top-color: #1DB954;
+            background: linear-gradient(to right, #f8f9ff, #fff0f9);
+        }
+
+        .wakatime-card {
+            border-top-color: #ff6b9d;
+        }
+
+        .github-card {
+            border-top-color: #6f42c1;
+        }
+
+        .quote-card {
+            border-top-color: #20c997;
+            grid-column: span 2;
+            background: linear-gradient(to right, #f0fff9, #f9f0ff);
+        }
+
+        .discord-activity {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .discord-user {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .discord-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--discord-blurple);
+        }
+
+        .user-info h3 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .user-info p {
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .discord-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 12px;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .status-online {
+            color: var(--discord-green);
+        }
+
+        .discord-activities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .activity-item {
+            flex: 1;
+            min-width: 200px;
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .activity-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .activity-info h4 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .activity-info p {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .now-playing {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .album-art {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .track-info h3 {
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .track-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background-color: #eee;
+            border-radius: 3px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            width: 65%;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            border-radius: 3px;
+        }
+
+        .wakatime-stats, .github-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .stat-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            text-align: center;
+            padding: 15px;
+            color: #5a5475;
+            line-height: 1.6;
+        }
+
+        .quote-author {
+            text-align: right;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #9d65ff;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 2px dashed var(--pastel-blue);
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-blue));
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 131, 193, 0.3);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(255, 131, 193, 0.4);
+        }
+
+        .social-link.discord {
+            background: linear-gradient(135deg, var(--discord-blurple), #9d65ff);
+            color: white;
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: #f0f0f0;
+        }
+
+        .dark-mode .container {
+            background-color: rgba(30, 30, 46, 0.95);
+            color: #f0f0f0;
+        }
+
+        .dark-mode .card {
+            background-color: #1e1e2e;
+            color: #f0f0f0;
+        }
+
+        .dark-mode .user-info h3,
+        .dark-mode .track-info h3,
+        .dark-mode .activity-info h4 {
+            color: #f0f0f0;
+        }
+
+        .dark-mode .user-info p,
+        .dark-mode .track-info p,
+        .dark-mode .activity-info p {
+            color: #ccc;
+        }
+
+        .dark-mode .quote {
+            color: #f0f0f0;
+        }
+
+        .dark-mode .activity-item {
+            background-color: #2a2a3e;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .discord-card,
+            .spotify-card,
+            .quote-card {
+                grid-column: span 1;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .username {
+                font-size: 2rem;
+            }
+            
+            .discord-activities {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Bubble Animation Background -->
+        <div class="bubble" style="width: 80px; height: 80px; top: 10%; left: 5%; animation-delay: 0s;"></div>
+        <div class="bubble" style="width: 120px; height: 120px; top: 60%; right: 8%; animation-delay: 2s;"></div>
+        <div class="bubble" style="width: 60px; height: 60px; bottom: 10%; left: 15%; animation-delay: 4s;"></div>
+        <div class="bubble" style="width: 90px; height: 90px; top: 20%; right: 20%; animation-delay: 1s;"></div>
+
+        <div class="header">
+            <h1 class="username">MeoMeow2108</h1>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i> テーマを切り替える
+            </button>
+        </div>
+
+        <div class="content">
+            <!-- Discord Card -->
+            <div class="card discord-card">
+                <div class="card-title">
+                    <i class="fab fa-discord" style="color: var(--discord-blurple);"></i>
+                    <span>Discord アクティビティ 🎮</span>
+                </div>
+                <div class="discord-activity">
+                    <div class="discord-user">
+                        <div class="discord-avatar">
+                            <i class="fas fa-cat"></i>
+                        </div>
+                        <div class="user-info">
+                            <h3 id="discordUsername">MeoMeow2108</h3>
+                            <p>
+                                <span class="discord-status">
+                                    <i class="fas fa-circle status-online"></i>
+                                    <span id="discordStatus">オンライン</span>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="discord-activities">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="activity-info">
+                                <h4 id="discordActivity1">Valorant</h4>
+                                <p id="discordActivity1Details">プレイ中 - 45分</p>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-headphones"></i>
+                            </div>
+                            <div class="activity-info">
+                                <h4 id="discordActivity2">Spotify</h4>
+                                <p id="discordActivity2Details">音楽を聴いています</p>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="activity-info">
+                                <h4 id="discordActivity3">Visual Studio Code</h4>
+                                <p id="discordActivity3Details">コーディング中</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spotify Card -->
+            <div class="card spotify-card">
+                <div class="card-title">
+                    <i class="fab fa-spotify" style="color: #1DB954;"></i>
+                    <span>今再生中 🎵</span>
+                </div>
+                <div class="now-playing">
+                    <div class="album-art">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="track-info">
+                        <h3 id="trackTitle">Cute Coding Lofi</h3>
+                        <p id="trackArtist">MeowMeow Dev</p>
+                        <div class="progress-bar">
+                            <div class="progress"></div>
+                        </div>
+                        <p style="margin-top: 5px; font-size: 0.8rem;">再生中 🎧</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WakaTime Card -->
+            <div class="card wakatime-card">
+                <div class="card-title">
+                    <i class="fas fa-clock" style="color: #ff6b9d;"></i>
+                    <span>コーディング活動 ⌛</span>
+                </div>
+                <div class="wakatime-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">
+                            <i class="fas fa-code"></i>
+                            <span>今日</span>
+                        </div>
+                        <div class="stat-value" id="todayTime">3h 42m</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">
+                            <i class="fas fa-calendar-week"></i>
+                            <span>今週</span>
+                        </div>
+                        <div class="stat-value" id="weekTime">28h 15m</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">
+                            <i class="fas fa-star"></i>
+                            <span>最も使用した言語</span>
+                        </div>
+                        <div class="stat-value" id="topLanguage">JavaScript</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GitHub Card -->
+            <div class="card github-card">
+                <div class="card-title">
+                    <i class="fab fa-github" style="color: #6f42c1;"></i>
+                    <span>GitHub ストリーク 📊</span>
+                </div>
+                <div class="github-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">
+                            <i class="fas fa-fire"></i>
+                            <span>現在のストリーク</span>
+                        </div>
+                        <div class="stat-value" id="currentStreak">42 日</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">
+                            <i class="fas fa-trophy"></i>
+                            <span>最長ストリーク</span>
+                        </div>
+                        <div class="stat-value" id="longestStreak">128 日</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">
+                            <i class="fas fa-heart"></i>
+                            <span>今週のコミット</span>
+                        </div>
+                        <div class="stat-value" id="weekCommits">87</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote Card -->
+            <div class="card quote-card">
+                <div class="card-title">
+                    <i class="fas fa-quote-left" style="color: #20c997;"></i>
+                    <span>今日の名言 🌸</span>
+                </div>
+                <div class="quote" id="dailyQuote">
+                    "コードは詩のようでなければならない。読みやすく、美しく、そして時に魔法のように感じられるものである。"
+                </div>
+                <div class="quote-author" id="quoteAuthor">- 匿名の開発者</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="social-links">
+                <a href="https://discord.com/users/meomeow2108" class="social-link discord" target="_blank" id="discordLink">
+                    <i class="fab fa-discord"></i> Discordで友達になる
+                </a>
+                <a href="https://zyo.lol/MeowMeow_dev" class="social-link" target="_blank">
+                    <i class="fas fa-paw"></i> 私のバイオを見る
+                </a>
+                <a href="https://github.com/MeoMeow2108" class="social-link" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+            <p>✨ 可愛い開発者生活を楽しんでいます ✨</p>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.className = 'fas fa-sun';
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i> ライトモード';
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i> テーマを切り替える';
+            }
+        });
+
+        // Daily Quotes (Japanese)
+        const quotes = [
+            {
+                text: "バグは悪くない。ただ、予期せぬ機能を追加しただけだ。",
+                author: "匿名の開発者"
+            },
+            {
+                text: "コードは書くより読まれることの方が多い。だから可愛く書こう。",
+                author: "MeowMeow 開発哲学"
+            },
+            {
+                text: "プログラミングは魔法みたい。論理的な呪文でコンピュータを動かすんだ。",
+                author: "メカニカル・ハート"
+            },
+            {
+                text: "完璧なコードよりも、可愛いコードの方がずっと価値がある。",
+                author: "Kawaii Dev Manifesto"
+            },
+            {
+                text: "エラーは失敗じゃない。コンピュータがあなたにもっと詳しく教えてほしいと言っているだけ。",
+                author: "Debugging Sensei"
+            },
+            {
+                text: "最も効果的なデバッグツールは、依然として慎重に考えられた思考である。",
+                author: "ブライアン・カーニハン"
+            },
+            {
+                text: "コードは人間のためのものであって、機械のためではない。",
+                author: "ハロルド・エイブルソン"
+            }
+        ];
+
+        // Set random daily quote
+        function setDailyQuote() {
+            const today = new Date().getDate();
+            const quoteIndex = today % quotes.length;
+            const quote = quotes[quoteIndex];
+            
+            document.getElementById('dailyQuote').textContent = `"${quote.text}"`;
+            document.getElementById('quoteAuthor').textContent = `- ${quote.author}`;
+        }
+
+        // Discord Activities Data
+        const discordActivities = {
+            games: [
+                { name: "Valorant", details: "プレイ中", time: "45分" },
+                { name: "Minecraft", details: "建築中", time: "2時間" },
+                { name: "Genshin Impact", details: "探索中", time: "1時間" },
+                { name: "Apex Legends", details: "ランクマッチ", time: "30分" },
+                { name: "Stardew Valley", details: "農場経営", time: "3時間" }
+            ],
+            apps: [
+                { name: "Visual Studio Code", details: "コーディング中", time: "4時間" },
+                { name: "Figma", details: "デザイン中", time: "2時間" },
+                { name: "Blender", details: "3Dモデリング", time: "1時間" },
+                { name: "Photoshop", details: "画像編集", time: "45分" }
+            ],
+            music: [
+                { name: "Spotify", details: "音楽を聴いています", time: "1時間" },
+                { name: "YouTube Music", details: "プレイリスト再生中", time: "30分" }
+            ]
+        };
+
+        // Discord Statuses
+        const discordStatuses = [
+            { status: "オンライン", icon: "fas fa-circle", color: "#57F287" },
+            { status: "取り込み中", icon: "fas fa-moon", color: "#FEE75C" },
+            { status: "退席中", icon: "fas fa-clock", color: "#FEE75C" },
+            { status: "オフライン", icon: "fas fa-circle", color: "#747F8D" }
+        ];
+
+        // Update Discord Activity
+        function updateDiscordActivity() {
+            // Update status
+            const statusIndex = Math.floor(Math.random() * discordStatuses.length);
+            const status = discordStatuses[statusIndex];
+            document.getElementById('discordStatus').textContent = status.status;
+            document.querySelector('.status-online').style.color = status.color;
+            
+            // Update activities
+            const randomGame = discordActivities.games[Math.floor(Math.random() * discordActivities.games.length)];
+            const randomApp = discordActivities.apps[Math.floor(Math.random() * discordActivities.apps.length)];
+            const randomMusic = discordActivities.music[Math.floor(Math.random() * discordActivities.music.length)];
+            
+            // Randomly decide which activities to show
+            const activities = [randomGame, randomMusic, randomApp];
+            
+            document.getElementById('discordActivity1').textContent = activities[0].name;
+            document.getElementById('discordActivity1Details').textContent = `${activities[0].details} - ${activities[0].time}`;
+            
+            document.getElementById('discordActivity2').textContent = activities[1].name;
+            document.getElementById('discordActivity2Details').textContent = `${activities[1].details} - ${activities[1].time}`;
+            
+            document.getElementById('discordActivity3').textContent = activities[2].name;
+            document.getElementById('discordActivity3Details').textContent = `${activities[2].details} - ${activities[2].time}`;
+            
+            // Update activity icons based on type
+            const icons = document.querySelectorAll('.activity-icon i');
+            icons[0].className = getIconForActivity(activities[0].name);
+            icons[1].className = getIconForActivity(activities[1].name);
+            icons[2].className = getIconForActivity(activities[2].name);
+        }
+
+        // Get appropriate icon for activity
+        function getIconForActivity(activityName) {
+            if (activityName.includes('Valorant') || activityName.includes('Minecraft') || 
+                activityName.includes('Genshin') || activityName.includes('Apex') || 
+                activityName.includes('Stardew')) {
+                return 'fas fa-gamepad';
+            } else if (activityName.includes('Spotify') || activityName.includes('YouTube')) {
+                return 'fas fa-headphones';
+            } else if (activityName.includes('Visual Studio') || activityName.includes('Figma') || 
+                       activityName.includes('Blender') || activityName.includes('Photoshop')) {
+                return 'fas fa-code';
+            }
+            return 'fas fa-desktop';
+        }
+
+        // Simulate Spotify track updates
+        const tracks = [
+            { title: "Cute Coding Lofi", artist: "MeowMeow Dev" },
+            { title: "Pastel Dreams", artist: "Kawaii Beats" },
+            { title: "Bubblegum Pop", artist: "J-Pop Idols" },
+            { title: "Ambient Meow", artist: "Cat Symphony" },
+            { title: "Synthwave Pastel", artist: "Neon Nights" },
+            { title: "Kawaii Future Bass", artist: "Anime OST" },
+            { title: "Chillhop Meow", artist: "Lofi Cat" }
+        ];
+
+        let currentTrackIndex = 0;
+        
+        function updateSpotifyTrack() {
+            const track = tracks[currentTrackIndex];
+            document.getElementById('trackTitle').textContent = track.title;
+            document.getElementById('trackArtist').textContent = track.artist;
+            
+            currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+            
+            // Animate progress bar
+            const progressBar = document.querySelector('.progress');
+            progressBar.style.width = '0%';
+            
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 65) {
+                    clearInterval(interval);
+                } else {
+                    width++;
+                    progressBar.style.width = width + '%';
+                }
+            }, 100);
+        }
+
+        // Simulate WakaTime stats updates
+        function updateWakaTimeStats() {
+            const todayHours = Math.floor(Math.random() * 2) + 2;
+            const todayMinutes = Math.floor(Math.random() * 60);
+            document.getElementById('todayTime').textContent = `${todayHours}h ${todayMinutes}m`;
+            
+            const weekHours = Math.floor(Math.random() * 10) + 20;
+            const weekMinutes = Math.floor(Math.random() * 60);
+            document.getElementById('weekTime').textContent = `${weekHours}h ${weekMinutes}m`;
+            
+            const languages = ["JavaScript", "TypeScript", "Python", "HTML/CSS", "Java"];
+            const randomLang = languages[Math.floor(Math.random() * languages.length)];
+            document.getElementById('topLanguage').textContent = randomLang;
+        }
+
+        // Simulate GitHub stats updates
+        function updateGitHubStats() {
+            const streak = Math.floor(Math.random() * 20) + 30;
+            document.getElementById('currentStreak').textContent = `${streak} 日`;
+            
+            const longest = Math.floor(Math.random() * 50) + 80;
+            document.getElementById('longestStreak').textContent = `${longest} 日`;
+            
+            const commits = Math.floor(Math.random() * 30) + 70;
+            document.getElementById('weekCommits').textContent = commits;
+        }
+
+        // Initialize everything
+        function init() {
+            setDailyQuote();
+            updateDiscordActivity();
+            updateSpotifyTrack();
+            updateWakaTimeStats();
+            updateGitHubStats();
+            
+            // Update Discord activity every 15 seconds
+            setInterval(updateDiscordActivity, 15000);
+            
+            // Update Spotify track every 10 seconds
+            setInterval(updateSpotifyTrack, 10000);
+            
+            // Update stats every minute
+            setInterval(() => {
+                updateWakaTimeStats();
+                updateGitHubStats();
+            }, 60000);
+            
+            // Update quote every day (simulated every 30 seconds for demo)
+            setInterval(setDailyQuote, 30000);
+            
+            // Create floating bubbles dynamically
+            createBubbles();
+            
+            // Set Discord link with your username
+            document.getElementById('discordLink').href = "https://discord.com/users/atk_meow";
+        }
+
+        // Create more bubbles
+        function createBubbles() {
+            const container = document.querySelector('.container');
+            for (let i = 0; i < 8; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                const size = Math.floor(Math.random() * 60) + 40;
+                const posX = Math.floor(Math.random() * 90);
+                const posY = Math.floor(Math.random() * 90);
+                const delay = Math.floor(Math.random() * 5);
+                
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${posX}%`;
+                bubble.style.top = `${posY}%`;
+                bubble.style.animationDelay = `${delay}s`;
+                
+                // Random pastel color
+                const pastelColors = [
+                    'linear-gradient(135deg, #ffd6e7, #ffc6e2)',
+                    'linear-gradient(135deg, #c1e3ff, #a6d4ff)',
+                    'linear-gradient(135deg, #d9c5ff, #c9afff)',
+                    'linear-gradient(135deg, #c2ffd9, #a8ffc9)',
+                    'linear-gradient(135deg, #fff6c1, #fff0a8)'
+                ];
+                const randomColor = pastelColors[Math.floor(Math.random() * pastelColors.length)];
+                bubble.style.background = randomColor;
+                
+                container.appendChild(bubble);
+            }
+        }
+
+        // Start the app
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
